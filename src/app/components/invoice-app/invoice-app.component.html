@@ -1,0 +1,232 @@
+
+
+
+
+
+
+  <body>
+
+    <!-- Nav bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" I>
+        <div class="container pt-2 pb-2">
+            <a class="navbar-brand" href="#">Invoice Generator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample04">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active mr-3">
+                        <a class="nav-link" href="#">Learn More<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="#">Invoicing Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary upgrade-btn" href="#">Upgrade</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Invoice Tool -->
+    <section class="pt-5 pb-5">
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 invoice-body">
+                  <form [formGroup]="form" width="800px" novalidate>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="md-form">
+                                        <h3 style="margin: 44px;position:absolute">Add Your Logo</h3>
+
+                                      <div class="image-box">
+                                          <input class="choose-file" type="file" formControlName="profile_image" >
+                                          <input class="choose-file" type="file" formControlName="profile_image" >
+                                          <input class="choose-file" type="file" formControlName="profile_image" >
+                                          <input class="choose-file" type="file" formControlName="profile_image" >
+                                          <input class="choose-file" type="file" formControlName="profile_image" >
+                                      </div>
+                                        <div class="form-group mt-3">
+                                            <label for="exampleFormControlInput1">Bill from:</label>
+                                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Who is this invoice from?"  formControlName="inv_frm">
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <label for="exampleFormControlInput1">Bill to:</label>
+                                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Who is this invoice to?"  formControlName="inv_to">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 form-right">
+                                <h2>Invoice</h2>
+
+                            <div class="form-group row mt-3">
+                                <label for="inputText" class="col-sm-3 col-form-label"><span>#</span></label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control"  placeholder="#123456" id="invoice-number" ng-model="invoice.invoice_number" formControlName="invoiceName">
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label for="inputText" class="col-sm-3 col-form-label">Date:</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" formControlName="doc" >
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label for="inputText" class="col-sm-3 col-form-label">Payment Terms:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" formControlName="pay_terms" >
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label for="inputText" class="col-sm-3 col-form-label">Due Date:</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" formControlName="due_date" >
+                                </div>
+                            </div>
+                            <div class="disabled"> 
+                            <p>Balance Due:{{ form.value.grantTotal | currency  }}</p>
+</div>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-5 invoice-middle">
+                        <div class="col-3">
+                            <h6>Item</h6>
+                        </div>
+                        <div class="col-3">
+                            <h6>Quantity</h6>
+                        </div>
+                        <div class="col-3">
+                            <h6>Rate</h6>
+                        </div>
+                        <div class="col-3">
+                            <h6>Amount</h6>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3" formArrayName="invoiceItems">
+                      <div class="form-row" *ngFor="let item of invoiceItems.controls; let i=index; let odd=odd;"
+                      [formGroupName]="i" [ngClass]="{odd_row: odd}">
+                        <div class="col-3">
+                            <input style="width: 100%;" type="text" class="form-control" id="" placeholder="description of service or product"  formControlName="name">
+
+                        </div>
+                        <div class="col-3">
+                            <input style="width: 100%;" type="number" class="form-control" id="" placeholder="qty. of product"  formControlName="qty">
+
+                        </div>
+                        <div class="col-3">
+                            <input style="width: 100%;" type="number" class="form-control" id="" placeholder="rate of product"  formControlName="cost">
+
+                        </div>
+                        <div class="col-2">
+                            <h6 class="pt-2">Total Amount: {{ item.value.total | currency }}</h6>
+
+                        </div>
+                        <mat-icon (click)="removeItem(item)">
+                            <a><i class="material-icons"> close
+                              </i></a>
+                          </mat-icon>
+                        </div>
+                       
+                    </div>
+
+                    <button mat mat-flat-button color="primary" class="mt-4" (click)="addItem()">Add Item</button>
+
+                    <div class="form-group ml-auto mr-4 row mt-5" style="width: 40%;">
+                        <label for="total" class="col-sm-3 col-form-label">Subtotal</label>
+                        <div class="col-sm-9">
+                            <input disabled type="text" class="form-control" value="{{ form.value.subTotal | currency  }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group ml-auto mr-4 row mt-3" style="width: 40%;">
+                        <label for="inputText" class="col-sm-3 col-form-label">Tax%</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" formControlName="taxPercent"  placeholder="0%">
+                        </div>
+                    </div>
+
+                    <div class="form-group ml-auto mr-4 row mt-3" style="width: 40%;">
+                        <label for="inputText" class="col-sm-3 col-form-label">Total</label>
+                        <div class="col-sm-9">
+                            <input disabled type="text" class="form-control" value="{{ form.value.grantTotal | currency  }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group ml-auto mr-4 row mt-3" style="width: 40%;">
+                        <label for="inputText" class="col-sm-3 col-form-label">Amount Paid</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" value="{{ form.value.grantTotal | currency  }}" placeholder="">
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 mt-5">
+                        <div class="form-group mt-3">
+                            <label for="exampleFormControlInput1">Notes:</label>
+                            <input style="width: 100%;" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Any relevant Information.." formControlName="notes">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group mt-3">
+                            <label for="exampleFormControlInput1">Terms and Conditions:</label>
+                            <input style="width: 100%;" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Terms and Condition-late fees, payement method"  formControlName="terms_condition">
+                        </div>
+                    </div>
+
+</form>
+                </div>
+
+                <div class="col-md-2 ml-auto mt-3 pr-2">
+                    <button class="btn btn-success btn1 mt-3"  (click)="submitData()">Preview</button>
+
+                    <a href="#" class="btn btn-secondary btn2 mt-3" >Send Invoice</a>
+
+                    <button class="btn btn-success btn3 mt-3" [disabled]="!form.valid">Download Invoice</button>
+
+                    <a href="#" class="btn btn-secondary btn4 mt-3">My Invoices (4)</a>
+
+                    <h6 class="mt-3">Currency: INR</h6>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!--  Footer -->
+
+    <footer class="section footer-classic context-dark bg-image" style="background: #2d3246;">
+        <div class="container pt-3 pb-1">
+            <div class="row text-center">
+                <div class="col-12">
+                    <p>We are an award-winning creative agency, dedicated to design awesome tools for you</p>
+                    <!-- Rights-->
+                    <p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>integralio</span><span>. </span><span>All Rights Reserved.</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+
+

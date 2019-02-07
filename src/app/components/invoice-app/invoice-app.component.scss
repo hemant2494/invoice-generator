@@ -1,0 +1,123 @@
+body {
+    overflow-x: hidden;
+}
+
+
+/* Invoice Tool */
+
+.navbar-brand {
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+nav ul li a {
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 100;
+}
+
+.upgrade-btn {
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+/* Section */
+
+section h2 {
+    color: #666666;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 26px;
+}
+
+section span {
+    background: #e6e6e6;
+    padding: 8px 16px;
+    border: solid 1px darkgrey;
+    border-radius: 5px
+}
+
+.form-control {
+    width: 120%;
+}
+
+.form-right .form-control {
+    width: 100%;
+}
+
+section label {
+    color: #555555;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-right label {
+    color: #555555;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+*::-webkit-input-placeholder {
+    font-size: 13px !important;
+}
+
+.invoice-body {
+    border: solid 1px darkgrey;
+    padding: 50px 40px;
+    background: white;
+}
+
+.invoice-middle {
+    background: #2d2d2d;
+    border-radius: 5px;
+}
+
+.invoice-middle h6 {
+    color: white;
+    padding: 6px 0px 5px 0px;
+    font-weight: 300;
+}
+
+section {
+    background: #eeeeee;
+}
+
+.btn1 {
+    padding: 6px 64px;
+}
+
+.btn2 {
+    padding: 6px 46px;
+}
+
+.btn3 {
+    padding: 6px 28px;
+}
+
+.btn4 {
+    padding: 6px 40px;
+}
+
+/* Footer */
+
+.context-dark,
+.bg-gray-dark,
+.bg-primary {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+.image-box {
+    height: 152px;
+    width: 205px;
+    border: 1px solid darkgrey;
+}
+
+.choose-file{
+    opacity: 0;
+}
+// .btn-success{
+//     background-color: green;
+//     color: white;
+// }

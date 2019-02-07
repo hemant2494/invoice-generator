@@ -1,0 +1,144 @@
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="hd-1">
+          <h1 class="text-center hd-text">INVOICE</h1>
+        </div>
+      </div>
+    </div>
+
+    <div id="contentToConvert">
+    <div class="row">
+      <div class="col-8">
+        <div class="image-upload">
+          <label for="file-input">
+            <img class="img-fluid img" id="Image" src="{{invoicePrint.profileimage}}" style="width: 109px; height: auto; border:1px solid #9591d8" />
+          </label>
+          {{profileimage}}
+        </div>
+        <div id="invoice1">
+          <p>{{invoicePrint.inv_frm}}</p>
+          <br>
+          <p>To:&nbsp;&nbsp; {{invoicePrint.inv_to}}</p>
+        </div>
+      </div>
+      <div class="col-4" id="invoice2">
+        <p>invoice id :{{invoicePrint.invoiceName}}</p>
+        <p>Date:{{invoicePrint.doc}}</p>
+        <p>Due Date:{{invoicePrint.due_date}}</p>
+        <p>Balance Due: {{invoicePrint.subTotal}}</p>
+      </div>
+    </div>
+
+    <!-- <div class="row" id="invoice3">
+      <div class="invoice-strip">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-2">
+                <p class="properties">Item</p>
+              </div>
+              <div class="col-2">
+                <p class="properties">Quantity</p>
+              </div>
+              <div class="col-2">
+                <p class="properties">Rate</p>
+              </div>
+              <div class="col-2">
+                <p class="properties">Amount</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+<div>
+    <div class="form-row" *ngFor="let item of invoicePrint.invoiceItems">
+      <div class="form-group col-md-4">
+        {{item.name}}
+      </div>
+      <div class="form-group col-md-2">
+        {{item.unit}}
+      </div>
+      <div class="form-group col-md-2">
+        {{item.qty}}
+      </div>
+      <div class="form-group col-md-2">
+        {{item.cost}}
+      </div>
+      <div class="form-group col-md-1">
+        {{item.total}}
+      </div>
+    </div>
+</div> -->
+<table id="table" style="display: none; text-align: right">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th>Rate</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of invoicePrint.invoiceItems">
+      <td> {{item.name}}</td>
+      <td> {{item.qty}}</td>
+      <td>{{item.cost}}</td>
+      <td>{{item.total}}</td>
+    </tr>
+    </tbody>
+    </table>
+    <br>
+    <br>
+    <div>
+      <div class="row" id="total">
+        <div class="col-8"></div>
+        <div class="col-4">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              SubTotal: {{invoicePrint.subTotal}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-6">
+              Tax: {{invoicePrint.tax}}
+            </div>
+            <div class="col-6">
+              Tax%: {{invoicePrint.taxPercent}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-8">
+              Amount Paid:{{invoicePrint.grantTotal}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="feedback amount-table">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="notes">Notes</label>
+          {{invoicePrint.notes}}
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="terms">Terms</label>
+          {{invoicePrint.terms_condition}}
+        </div>
+      </div>
+    </div>
+</div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-primary float-right" (click)="generate()">Download</button>
+      </div>
+    </div>
+  </div>
